@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgresdb
+    image: postgres:14.2
+    environment:
+      - POSTGRES_USER=aimdevgroup
+      - POSTGRES_PASSWORD=Secret01#
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=aimdatacenter
+      - TZ=Asia/Bangkok
+    volumes:
+       - ./pgdata:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    # networks:
+    #   - postgres
+    restart: unless-stopped
+  
+  # pgadmin:
+  #   container_name: pgadmin4
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=aunggoon.a@aimdevgroup.co.th
+  #     - PGADMIN_DEFAULT_PASSWORD=A!MDevel0p
+  #   # volumes:
+  #   #    - ./pgadmin:/root/.pgadmin
+  #   ports:
+  #     - "8080:80"
+  #   links:
+  #     - "postgres:database"
+  #   networks:
+  #     - postgres
+  #   restart: unless-stopped
+
+# networks:
+#   postgres:
+#     driver: bridge
+
+volumes:
+    postgres:
+    # pgadmin:
